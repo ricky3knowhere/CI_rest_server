@@ -12,13 +12,14 @@ class Mahasiswa extends REST_Controller {
     parent::__construct();
     $this ->load ->model('Mahasiswa_models','mahasiswa');
 
-    $this->methods['index_get']['limit'] = 5;
-    $this->methods['index_post']['limit'] = 5;
-
+    $this->methods['index_get']['limit'] = 100;
+    $this->methods['index_post']['limit'] = 20;
+    $this->methods['index_put']['limit'] = 20;
+    $this->methods['index_delete']['limit'] = 20;
   }
   
   public function index_get() {
-   
+
     $id = $this -> get('id');
     
     if ($id == null) {
@@ -128,6 +129,7 @@ class Mahasiswa extends REST_Controller {
     }else {
       $this->response([
         'status' => false,
+        'error' => $update,
         'message' => 'Update data failed!'
       ], REST_Controller::HTTP_BAD_REQUEST);
       
